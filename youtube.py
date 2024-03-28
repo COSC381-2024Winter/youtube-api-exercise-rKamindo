@@ -20,10 +20,13 @@ def youtube_search(query_term, max_results):
         part='id, snippet',
         maxResults=max_results
     ).execute()
-
+    
     search_list = []
     for search_item in search_response["items"]:
         search_list.append(search_item)
+
+    if len(search_list) == 0:
+        print("No results")
     
     if len(search_list) < int(max_results):
         print("No more results")
@@ -33,7 +36,6 @@ def youtube_search(query_term, max_results):
 if __name__ == "__main__":
     query_term = sys.argv[1]
     max_results = sys.argv[2]
-    response = youtube_search(query_term, max_results)
-    print(response)
+    videos_list, next_page_token = youtube_search(query_term, max_results, "CAMQAA")
     with open('response.json', 'w') as file: # outputs response json to a file for 
-        json.dump(response, file, indent=4)
+        json.dump(videos_list, file, indent=4)
