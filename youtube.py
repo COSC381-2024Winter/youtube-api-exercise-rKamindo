@@ -36,6 +36,7 @@ def youtube_search(query_term, max_results):
 if __name__ == "__main__":
     query_term = sys.argv[1]
     max_results = sys.argv[2]
-    videos_list, next_page_token = youtube_search(query_term, max_results, "CAMQAA")
+    videos_list = youtube_search(query_term, max_results)
+    print(videos_list)
     with open('response.json', 'w') as file: # outputs response json to a file for 
         json.dump(videos_list, file, indent=4)
