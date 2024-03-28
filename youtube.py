@@ -34,5 +34,6 @@ if __name__ == "__main__":
     query_term = sys.argv[1]
     max_results = sys.argv[2]
     response = youtube_search(query_term, max_results)
+    print(response)
     with open('response.json', 'w') as file: # outputs response json to a file for 
         json.dump(response, file, indent=4)
