@@ -39,7 +39,6 @@ def youtube_search(query_term, max_results, page_token=None):
 if __name__ == "__main__":
     query_term = sys.argv[1]
     max_results = sys.argv[2]
-
     next_page_token = None
     videos_list1, next_page_token = youtube_search(query_term, max_results)
     print(videos_list1)
