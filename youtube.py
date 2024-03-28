@@ -23,7 +23,7 @@ def youtube_search(query_term, max_results, page_token=None):
     ).execute()
     
     next_page_token = search_response["nextPageToken"]
-    print("page token: ",next_page_token)
+    print("nextPageToken: ",next_page_token)
     search_list = []
     for search_item in search_response["items"]:
         search_list.append(search_item)
@@ -40,7 +40,9 @@ if __name__ == "__main__":
     query_term = sys.argv[1]
     max_results = sys.argv[2]
     next_page_token = None
-    videos_list1, next_page_token = youtube_search(query_term, max_results)
-    print(videos_list1)
-    videos_list2, next_page_token = youtube_search(query_term, max_results, "CAEQAA")
-    print(videos_list2)
+    for i in range(5):
+        videos_list, next_page_token = youtube_search(query_term, max_results, next_page_token)
+        print(videos_list)
+        if len(videos_list) == 0:
+            print("No more pages.")
+            break
