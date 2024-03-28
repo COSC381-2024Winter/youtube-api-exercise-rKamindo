@@ -1,9 +1,6 @@
 import argparse
 import sys
-<<<<<<< Updated upstream
-=======
 import json
->>>>>>> Stashed changes
 import config
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
@@ -24,14 +21,19 @@ def youtube_search(query_term, max_results):
         maxResults=max_results
     ).execute()
 
+    search_list = []
     for search_item in search_response["items"]:
-        print(search_item)
+        search_list.append(search_item)
     
-    return search_response["items"]
+    if len(search_list) < int(max_results):
+        print("No more results")
+    
+    return search_list
 
 if __name__ == "__main__":
     query_term = sys.argv[1]
     max_results = sys.argv[2]
     response = youtube_search(query_term, max_results)
+    print(response)
     with open('response.json', 'w') as file: # outputs response json to a file for 
         json.dump(response, file, indent=4)
